@@ -1,2 +1,2 @@
-# PWAGAP
-First PWA on Lagrangian heuristic
+# Fantanalytics
+A PWA to support fantasy football draft auctions
