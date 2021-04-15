@@ -1,0 +1,147 @@
+﻿
+/********* PAGINA 0: INDEX *************/
+#indexPage .login-button {
+	font-size: 3em;
+}
+
+#indexPage .cancel-container {
+	background-color: #f1f1f1;
+}
+
+#indexPage .forgot-password {
+	position: relative;
+	float: right;
+	top: 15px;
+}
+
+
+/************ PAGINA 3: INSERIMENTO PREVENTIVI **************/
+#insertPreventivoContainer h2 {
+	margin: 20px 0;
+}
+
+#insertPreventivoContainer .form-line-custom {
+	margin: 10px auto;
+}
+
+#insertPreventivoContainer .dropdownlist-container {
+	margin: 10px 0;
+}
+
+	#insertPreventivoContainer .dropdownlist-container select {
+		display: inline-block;
+		margin: 2px 10px 5px 0;
+		padding: .5rem .75rem;
+		font-size: 1rem;
+		line-height: 1.25;
+		color: #495057;
+		background-color: #fff;
+		background-image: none;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.15);
+		border-radius: .25rem;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	}
+
+#insertPreventivoContainer .custom-select-list {
+	width: 100%;
+	border-radius: 5px;
+	padding: .5rem .75rem;
+}
+
+#insertPreventivoContainer .custom-data-container {
+	margin-bottom: 0px;
+}
+
+#insertPreventivoContainer .custom-text-area {
+	resize: none;
+}
+
+#insertPreventivoContainer .custom-form-check-input {
+	position: absolute;
+	margin-top: 0.25rem;
+	margin-left: -1.25rem;
+}
+
+#insertPreventivoContainer .custom-check-container {
+	margin-left: 2rem;
+}
+
+#insertPreventivoContainer #viaggioRitornoContainer {
+	display: none;
+}
+
+#insertPreventivoContainer .custom-button-container {
+	margin: 0 2em;
+}
+
+	#insertPreventivoContainer .custom-button-container input {
+		margin: 0 10px;
+		padding: 10px;
+		border-radius: 5px;
+	}
+
+#insertPreventivoContainer .button-save {
+	color: green;
+}
+
+#insertPreventivoContainer .button-reset {
+	color: red;
+}
+
+/******** PAGINA 4: ACCETTA PREVENTIVO **********/
+#acceptPreventivoPage .checkbox-cell {
+	background-color: yellow;
+}
+
+/******** PAGINA 10: INSERIMENTO CONSUNTIVO *****/
+#insertConsuntivoContainer h2 {
+	margin: 20px 0;
+}
+
+#insertConsuntivoContainer .form-line-custom {
+	margin: 10px auto;
+}
+
+#insertConsuntivoContainer .dropdownlist-container {
+	margin: 10px 0;
+}
+
+	#insertConsuntivoContainer .dropdownlist-container select {
+		display: inline-block;
+		margin: 2px 10px 5px 0;
+		padding: .5rem .75rem;
+		font-size: 1rem;
+		line-height: 1.25;
+		color: #495057;
+		background-color: #fff;
+		background-image: none;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.15);
+		border-radius: .25rem;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	}
+
+#insertConsuntivoContainer .custom-select-list {
+	width: 100%;
+	border-radius: 5px;
+	padding: .5rem .75rem;
+}
+
+#insertConsuntivoContainer .custom-button-container {
+	margin: 0 2em;
+}
+
+	#insertConsuntivoContainer .custom-button-container input {
+		margin: 0 10px;
+		padding: 10px;
+		border-radius: 5px;
+	}
+
+#insertConsuntivoContainer .button-save {
+	color: green;
+}
+
+#insertConsuntivoContainer .button-reset {
+	color: red;
+}

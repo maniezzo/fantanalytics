@@ -1,116 +1,123 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
-   <title>GAPJS</title>
+   <title>Fantanalytics</title>
+   <link rel="shortcut icon" href="Icon2.ico">
    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">   
    <link rel="manifest" href="manifest.json">
-   <link rel="stylesheet" href="scripts/GAPstyle.css" type="text/css">
+   <link rel="stylesheet" href="styles/mystyle.css" type="text/css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-   <script>
-      $( document ).ready(function() {
-         $("#outputText").val("");
-      });
-   </script>   
-   <script>
-   if ('serviceWorker' in navigator) {
-     navigator.serviceWorker.register('./service-worker.js')
-     .then(function(registration) 
-     {  console.log('Registration successful, scope is:', registration.scope);
-     })
-     .catch(function(error) 
-     {  console.log('Service worker registration failed, error:', error);
-     });
-  }
-  </script>
-  <script src="scripts/parallel.js"></script>
-  <script src="scripts/AAAglobalVars.js"></script>
-  <script src="scripts/loadGap.js"></script>
-  <script src="scripts/constructive.js"></script>
-  <script src="scripts/localSearch.js"></script>
-  <script src="scripts/knapsackDP.js"></script>
-  <!-- These go with the worker
-  <script src="scripts/lagrangian.js"></script>
-  <script src="lagrgap.min.js"> </script>
-  <script src="lagrgap_min1.js"> </script>
-  -->
+   <script type="text/javascript">
+	// mostra il modal
+	function showLogin(flag) {
+		if (flag) {
+			$('#modal').show();
+		} else {
+			$('#modal').hide();
+		}
+
+	}
+   // qui ci prova
+   function authPass(u,p) 
+   {  var uc="",pc="";
+      window.sessionStorage.setItem("auth", "guest");
+      window.sessionStorage.setItem("isAuthorized", "true");
+      for(i=0;i<u.length;i++)
+         uc+=String.fromCharCode(u.charCodeAt(i) - 1);
+      for(i=0;i<p.length;i++)
+         pc+=String.fromCharCode(p.charCodeAt(i) - 1);
+      if (u && p) self.location = "auth.html?" + uc + pc;
+      return false;
+   }
+   </script>
+   <script type="text/javascript">
+   // qui da pagereload se sbagliato
+   if (location.search.indexOf("auth=failed") != -1) 
+   {  document.write("<span style=\"color:#ff0000\">Username o pwd sbagliati! Riprova</span>");
+      window.sessionStorage.setItem("isAuthorized", "false");
+   }
+   </script>
 </head>
-<body onload="showPage()" style="margin:0;">
-   <div id="loader"></div>
+<body  id="indexPage" style="margin:0;">
 
-   <div class="container-fluid" id="thePage">
-   <p style="text-align:center;color:#A14366;font-size:1.5em;">Javascript GAP solver</p>
+	<!-- Button to open the modal login form -->
+	<button id="loginButton" class="login-button" onclick="showLogin(true);">Login</button>
 
-   <div class="dropdown">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100%;background-color: #EAFACF;color: black">
-        Load from site
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" type="button" onclick="readFromSite('elba.json');">elba.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('gap8_0.json');">gap8_0.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('gap12_0.json');">gap12_0.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('gapa_0.json');">gapa_0.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('gapd_0.json');">gapd_0.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('gapd_3.json');">gapd_3.json</a>
-        <a class="dropdown-item" type="button" onclick="readFromSite('e20200.json');">e20200.json</a>
-      </div>
-   </div> 
+	<!-- The Modal -->
+	<div id="modal" class="modal">
+		<span class="close-modal" onclick="showLogin(false);" title="Close Modal">&times;</span>
 
-   <div>
-      <button button type="button" class="btn btn-default btn-block" style="background-color: #EAFACF;" onclick="readWithCORS();">Load remote</button> 
+		<!-- Modal Content -->
+		<div class="modal-content animate" id="formLogin">
+			<div class="img-container">
+				<img class="avatar" src="./images/logoinit.png" alt="Avatar">
+			</div>
+			<div class="container" style="font-family:Arial">
+				<label><b>Username</b></label>
+				<input id="txtUser" type="text" placeholder="Enter Username" name="uname" required>
+
+				<label><b>Password</b></label>
+				<input id="txtPassword" type="password" placeholder="Enter Password" name="psw" required>
+
+				<button id="btnCheck" onclick="checkUsr()">Login</button>
+				<!-- <input type="checkbox" checked="checked"> Remember me -->
+			</div>
+			<div class="container cancel-container">
+				<button class="cancel-button" type="button" onclick="showLogin(false);">Cancel</button>
+				<span class="forgot-password"><a href="#">Forgot password</a>?</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" id="thePage">
+		<p style="text-align:center;color:#A14366;font-size:1.5em;">Fantanalytics access, please login</p>
    </div>
 
-   <div class="form-group">
-      <textarea class="form-control" rows="1" style="height:6vmin;" id="inputRemote">yagiura\gapa\gapa_0.json</textarea>
-   </div>    
-   <button type="button" class="btn btn-default btn-block" style="background-color: #EAFACF;" onclick="loadLocalFile();">Load local file</button> 
-   <div class="btn btn-default btn-file" style="border-color:#fff">
-      <input type="file" id="inputLocal" />
-   </div>
-   <button type="button" class="btn btn-default btn-block" style="background-color: #EAFACF;" onclick="solveConstruct();">Solve constructive
-   </button> 
+	<script src="js/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			sessionStorage.setItem("user", "none");
+		});
+		$(function () {
+			$('.modal-content').keypress(function (e) {
+				// <enter> key pressed
+				if (e.which == 13) {
+					checkUsr();
+				}
+			})
+		})
+	</script>
+	<script>
+		// Get the modal
+		var modal = document.getElementById('modal');
 
-   <p style="text-align:center;font-size:1.5em;color:#A14366;line-height:6vmin;">Lagrangian matheuristics</p>
-   <button type="button" class="btn btn-default btn-block" style="background-color: #EAFACF;" onclick="startWorker({path:'lagrangian.js', func:'run_lagrCap'});">Lagrangian, capacities relaxed
-   </button> 
-   <button type="button" class="btn btn-default btn-block" style="background-color: #EAFACF;" onclick="startWorker({path:'lagrangian.js', func:'run_lagrAss'});">Lagrangian, assignments relaxed
-   </button> 
-   
-   <div class="well well-sm">Lagrangian parameters
+		// ************************** get, un parametro
+		function checkUsr() {
+			var username = $('#txtUser').val();
+			var password = $('#txtPassword').val();
+			if( authPass(username,password) )
+			{
+				//alert("trovato! " + result);
+				showLogin(false);
+			}
+			else
+			{
+				//alert("Utente "+username+" non riconosciuto");
+				showLogin(false);
+			}
+		}
 
-      <div class="input-group"> 
-        <span class="input-group-addon col-sm-6 control-label">Iterations</span>
-        <input type="number" value="10000" min="1" step="1" data-number-to-fixed="0" data-number-stepfactor="1" class="form-control currency col-sm-6" id="inputIter" />
-      </div>   
-
-      <div class="input-group"> 
-        <span class="input-group-addon col-sm-6 control-label">Alpha</span>
-        <input type="number" value="2.5" min="0.1" step="0.1" data-number-to-fixed="2" data-number-stepfactor="0.1" class="form-control currency col-sm-6" id="inputAlpha" />
-      </div>   
-
-      <div class="input-group"> 
-        <span class="input-group-addon col-sm-6 control-label">min alpha:</span>
-        <input type="number" value="0.001" min="0.001" step="0.001" data-number-to-fixed="3" data-number-stepfactor="0.001" class="form-control currency col-sm-6" id="inputMinAlpha" />
-      </div>   
-   </div>   <!-- fine well -->
-   <div class="form-group">
-      <textarea class="form-control" rows="5" id="outputText"></textarea>
-   </div>    
-   </div>
-
-   <script>
-      function showLoader() 
-      {  document.getElementById("loader").style.display = "block";
-         document.getElementById("thePage").style.display = "none";
-      }
-      
-      function showPage() 
-      {  document.getElementById("loader").style.display = "none";
-         document.getElementById("thePage").style.display = "block";
-      }
-      </script></body>
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>	 
+</body>
 </html>
